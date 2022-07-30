@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
-
+import axios from "axios";
+import ContentBody from "./components/ContentBody";
+import {Activity, Team, User} from "./types";
+let info = require('./data.json');
 function App() {
+  type TData = {
+    teams: Array<Team>,
+    activities: Array<Activity>,
+    user: User
+  }
+  const [data, setData] = useState<TData>(info);
+  //
+  // useEffect(() => {
+  //   // setData(data);
+  //   // console.log(data);
+  //   console.log(typeof data);
+  // }, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ContentBody teams={data.teams}/>
     </div>
   );
 }
